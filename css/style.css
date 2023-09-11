@@ -402,8 +402,9 @@ section {
 
 .header__container.transparent {
   position: absolute;
-  top: 0;
   left: 0;
+  right: 0;
+  margin: 0 auto;
   z-index: 1000;
 }
 
@@ -1169,6 +1170,12 @@ section {
   height: 63.2rem;
 }
 
+.project .swiper-project__photo {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 63.2rem;
+}
+
 .project .swiper-project-pagination {
   bottom: 4rem !important;
 }
@@ -1291,6 +1298,9 @@ section {
 }
 
 .realty .swiper-realty__photo {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 68.4rem;
   -webkit-filter: grayscale(90%);
           filter: grayscale(90%);
 }
@@ -2159,7 +2169,7 @@ body {
     height: 5.8rem;
   }
 
-  .header__popup {
+  .header__popup-container {
     width: 66rem;
     padding: 2.4rem 3rem 2.4rem 9rem;
     left: 0;
