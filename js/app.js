@@ -32,8 +32,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const headerButton = header.querySelector('.header__button');
     const headerButtonNavigate = header.querySelectorAll('.header__popup-item');
     const headerPopup = header.querySelector('.header__popup');
-    const headerPopupContainer = headerPopup.querySelector('.header__popup-container');
-    const headerPopupClose = headerPopupContainer.querySelector('.header__popup-close');
+    const headerPopupContainer = headerPopup.querySelector(
+      '.header__popup-container'
+    );
+    const headerPopupClose = headerPopupContainer.querySelector(
+      '.header__popup-close'
+    );
 
     console.log(headerPopup);
 
@@ -70,6 +74,21 @@ document.addEventListener('DOMContentLoaded', function () {
           component.classList.remove('active');
         });
         component.classList.add('active');
+      });
+    });
+  }
+  //////////////////////////////// SCRIPT-SUBCATEGORIES //////////////////////////////////
+  if (document.querySelector('.subcategories')) {
+    const subcategories = document.querySelector('.subcategories');
+    const subcategoriesProjectsButton =
+      subcategories.querySelectorAll('.filters__button');
+    // Событие при нажатии на элемент хлебной крошки
+    subcategoriesProjectsButton.forEach((button) => {
+      button.addEventListener('click', () => {
+        subcategoriesProjectsButton.forEach((button) => {
+          button.classList.remove('active');
+        });
+        button.classList.add('active');
       });
     });
   }

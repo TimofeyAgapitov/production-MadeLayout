@@ -1750,6 +1750,44 @@ section {
   margin-bottom: 4rem;
 }
 
+.subcategories-projects__content .content__filters {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 4rem;
+}
+
+.subcategories-projects__content .content__filters .filters__button {
+  color: #7d7d7d;
+  text-transform: uppercase;
+  padding-right: 4rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 0.2rem solid #7d7d7d;
+}
+
+.subcategories-projects__content .content__filters .filters__button:not(:first-child) {
+  padding-left: 4rem;
+}
+
+.subcategories-projects__content .content__filters .filters__button.active {
+  color: #f8eb00;
+  border-bottom-color: #f8eb00;
+  position: relative;
+}
+
+.subcategories-projects__content .content__filters .filters__button.active::before {
+  content: "";
+  position: absolute;
+  bottom: -0.2rem;
+  right: -0.7rem;
+  width: 1.6rem;
+  height: 2.5rem;
+  border-right: 0.3rem solid #f8eb00;
+  -webkit-transform: skew(-30deg);
+      -ms-transform: skew(-30deg);
+          transform: skew(-30deg);
+}
+
 .subcategories-projects__content .content__projects {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1788,6 +1826,7 @@ section {
 
 .subcategories-projects__content .content__projects .project-box:hover .project-center {
   border-left-color: #101010;
+  border-top-color: #101010;
 }
 
 .subcategories-projects__content .content__projects .project-box:hover .project-right {
@@ -2887,6 +2926,29 @@ body {
 
   .subcategories-projects__content .content__subtitle {
     width: 100%;
+  }
+
+  .subcategories-projects__content .content__filters {
+    overflow-y: auto;
+  }
+
+  .subcategories-projects__content .content__filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .subcategories-projects__content .content__filters .filters__button {
+    border-bottom-width: 0.3rem;
+    -webkit-box-flex: 0;
+        -ms-flex: none;
+            flex: none;
+    padding-bottom: 1.6rem;
+  }
+
+  .subcategories-projects__content .content__filters .filters__button.active::before {
+    height: 5rem;
+    bottom: -0.3rem;
+    right: -1.5rem;
+    border-right-width: 0.4rem;
   }
 
   .subcategories-projects__content .content__projects .project-box {
