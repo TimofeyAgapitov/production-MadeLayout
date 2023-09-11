@@ -32,8 +32,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const headerButton = header.querySelector('.header__button');
     const headerButtonNavigate = header.querySelectorAll('.header__popup-item');
     const headerPopup = header.querySelector('.header__popup');
-    const headerPopupClose = headerPopup.querySelector('.header__popup-close');
-    const headerOverlay = header.querySelector('.overlay');
+    const headerPopupContainer = headerPopup.querySelector('.header__popup-container');
+    const headerPopupClose = headerPopupContainer.querySelector('.header__popup-close');
+
+    console.log(headerPopup);
 
     headerButton.addEventListener('click', () => {});
     // Событие если нажимают на элемент меню
@@ -47,12 +49,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     // Событие для открытия меню
     headerButton.addEventListener('click', () => {
-      // headerOverlay.style.display = 'block';
       headerPopup.style.display = 'block';
     });
     // Событие для закрытия меню
     headerPopupClose.addEventListener('click', () => {
-      // headerOverlay.style.display = 'none';
       headerPopup.style.display = 'none';
     });
   }
