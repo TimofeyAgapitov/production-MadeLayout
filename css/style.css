@@ -1620,6 +1620,8 @@ section {
   padding: 3.6rem;
   background-repeat: no-repeat;
   background-size: cover;
+  -webkit-backdrop-filter: grayscale(90%);
+          backdrop-filter: grayscale(90%);
 }
 
 .subcategories__content .content-top__info {
