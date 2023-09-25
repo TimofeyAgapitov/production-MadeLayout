@@ -2320,6 +2320,7 @@ body {
   }
 
   .header__logotype {
+    width: 17rem;
     margin: 0 auto;
   }
 
