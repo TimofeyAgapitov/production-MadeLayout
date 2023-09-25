@@ -1663,13 +1663,13 @@ section {
 }
 
 .about-us__content .content-bottom__info .info-title {
-  border-bottom: 0.4rem solid #FFFFFF;
+  border-bottom: 0.4rem solid #ffffff;
   padding-bottom: 1.1rem;
 }
 
 .about-us__content .content-bottom__info .info-text {
   width: 49.5rem;
-  color: #FFFFFF;
+  color: #ffffff;
   padding-top: 1.1rem;
 }
 
@@ -2951,15 +2951,17 @@ body {
     -webkit-box-flex: 1;
         -ms-flex: 1 0;
             flex: 1 0;
+    bottom: 8rem;
+    left: 4rem;
   }
 
   .about-us__content .content-bottom__info {
-    width: 100%;
+    width: 63rem;
   }
 
   .about-us__content .content-bottom__info .info-title {
     padding-bottom: 2.4rem;
-    border-bottom: 0.3rem solid #FFFFFF;
+    border-bottom: 0.3rem solid #ffffff;
   }
 
   .about-us__content .content-bottom__info .info-text {
