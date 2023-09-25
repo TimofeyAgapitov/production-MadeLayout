@@ -36,6 +36,17 @@ function isWebp() {
 isWebp();
 
 document.addEventListener('DOMContentLoaded', function () {
+  //////////////////////////////// SCRIPT-POPUP //////////////////////////////////
+  if (document.querySelector('.popup')) {
+    const popupArray = document.querySelectorAll('.popup');
+    popupArray.forEach(function (element) {
+      element
+        .querySelector('.popup-overlay')
+        .addEventListener('click', function () {
+          element.style.display = 'none';
+        });
+    });
+  }
   //////////////////////////////// SCRIPT-HEADER //////////////////////////////////
   if (document.querySelector('.header')) {
     const header = document.querySelector('.header');
@@ -77,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
     realtyTypeComponents[0].classList.add('active');
     // Cобытие если нажимают на плашку с подвидом недвижимости
     realtyTypeComponents.forEach((component) => {
-      component.addEventListener('click', () => {
+      component.addEventListener('mouseover', () => {
         realtyTypeComponents.forEach((component) => {
           component.classList.remove('active');
         });
@@ -101,6 +112,28 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
+//////////////////////////////// SCRIPT-PARTNERS //////////////////////////////////
+if (document.querySelector('.partners')) {
+  const partners = document.querySelector('.partners');
+  const partnersContent = partners.querySelector('.content-right');
+  const partnersArray = partners.querySelectorAll('.partners-box');
+
+  const partnersElement = document.createElement('div');
+  partnersElement.classList.add('partners-box', 'disactive');
+
+  setInterval(() => {
+    partnersContent.classList.add('animationLight');
+    setTimeout(() => {
+      partnersContent.classList.remove('animationLight');
+    }, 5000);
+  }, 8000);
+
+  if (screen.width > 768 && partnersArray.length != 9) {
+    partnersContent.appendChild(partnersElement);
+  } else {
+    partnersContent.removeChild(partnersElement);
+  }
+}
 
 //////////////////////////////// SWIPERS //////////////////////////////////
 
