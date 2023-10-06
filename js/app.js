@@ -73,10 +73,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // Событие для открытия меню
     headerButton.addEventListener('click', () => {
       headerPopup.style.display = 'block';
+      document.body.style.overflow = 'hidden';
     });
     // Событие для закрытия меню
     headerPopupClose.addEventListener('click', () => {
       headerPopup.style.display = 'none';
+      document.body.style.overflow = 'visiable';
     });
   }
   //////////////////////////////// SCRIPT-REALTY //////////////////////////////////
@@ -205,44 +207,50 @@ const swiperRealtyFirst = new Swiper('.swiper-realty', {
 
 //////////////////////////////// CURSOR //////////////////////////////////
 
-const customCursorBlocks = document.querySelectorAll('.content-custom-cursor');
-const customCursor = document.querySelector('.custom-cursor');
-const circle = customCursor.querySelector('.circle');
-const cursor = customCursor.querySelector('.cursor');
-const effect = customCursor.querySelector('.effects');
+if (document.querySelector('.custom-cursor')) {
+  const customCursorBlocks = document.querySelectorAll(
+    '.content-custom-cursor'
+  );
+  const customCursor = document.querySelector('.custom-cursor');
+  const circle = customCursor.querySelector('.circle');
+  const cursor = customCursor.querySelector('.cursor');
+  const effect = customCursor.querySelector('.effects');
 
-document.addEventListener('mousemove', (e) => {
-  // Обновляем позицию кастомного курсора в соответствии с позицией указателя мыши.
-  customCursor.style.left = e.pageX - 16 + 'px';
-  customCursor.style.top = e.pageY - 12 + 'px';
-});
+  document.addEventListener('mousemove', (e) => {
+    // Обновляем позицию кастомного курсора в соответствии с позицией указателя мыши.
+    customCursor.style.left = e.pageX - 16 + 'px';
+    customCursor.style.top = e.pageY - 12 + 'px';
+  });
 
-// Добавляем слушатель события окончания анимации .circle
-circle.addEventListener('animationend', () => {
-  // Удаляем класс .hide для отображения .cursor после окончания анимации .circle
-  cursor.classList.add('show');
-});
+  // Добавляем слушатель события окончания анимации .circle
+  circle.addEventListener('animationend', () => {
+    // Удаляем класс .hide для отображения .cursor после окончания анимации .circle
+    cursor.classList.add('show');
+  });
 
-customCursorBlocks.forEach(function (element) {
-  element.addEventListener('mouseenter', (e) => {
-    customCursor.style.display = 'block';
-    setTimeout(() => {
-      cursor.classList.add('click');
+  customCursorBlocks.forEach(function (element) {
+    element.addEventListener('mouseenter', (e) => {
+      customCursor.style.display = 'block';
       setTimeout(() => {
-        cursor.classList.remove('click');
-        effect.style.display = 'block';
+        cursor.classList.add('click');
         setTimeout(() => {
-          effect.style.display = 'none';
-        }, 2000);
-      }, 250);
-    },1000);
-    document.body.style.cursor = 'none';
-    e.stopPropagation(); // Предотвращаем распространение события на родительский customCursor
+          cursor.classList.remove('click');
+          effect.style.display = 'block';
+          setTimeout(() => {
+            effect.style.display = 'none';
+          }, 2000);
+        }, 250);
+      }, 1000);
+      document.body.style.cursor = 'none';
+      e.stopPropagation(); // Предотвращаем распространение события на родительский customCursor
+    });
+    element.addEventListener('mouseleave', (e) => {
+      customCursor.style.display = 'none';
+      document.body.style.cursor = 'auto';
+      e.stopPropagation(); // Предотвращаем распространение события на родительский customCursor
+    });
+    element.addEventListener('click', () => {});
   });
-  element.addEventListener('mouseleave', (e) => {
-    customCursor.style.display = 'none';
-    document.body.style.cursor = 'auto';
-    e.stopPropagation(); // Предотвращаем распространение события на родительский customCursor
-  });
-  element.addEventListener('click', () => {});
-});
+}
+
+//////////////////////////////// CHART //////////////////////////////////

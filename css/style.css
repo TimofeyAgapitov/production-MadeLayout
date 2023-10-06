@@ -899,7 +899,7 @@ section {
 }
 
 .header__popup-container {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   z-index: 1100;
@@ -1192,6 +1192,10 @@ section {
 .main__logotype .logotype {
   width: 70.1rem;
   height: 20.7rem;
+}
+
+.main__content a {
+  cursor: none;
 }
 
 .main__decoration-top,
