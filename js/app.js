@@ -277,25 +277,35 @@ if (document.querySelector('.chart')) {
     chartLines = chart.querySelectorAll('.chart-area .line'),
     chartArea = chart.querySelector('.chart-area .chart-area-points');
 
-  const arrayPercent = [23, 61, 98, 66];
+  const arrayPercent = [23, 61, 98];
 
   for (let i = 0; i < arrayPercent.length; i++) {
     // Добавление точек с указателями (количество зависит от размера массива arrayPercent)
     const chartPointBox = document.createElement('div');
     chartPointBox.classList.add('chart-point-box');
 
+    const chartAnimationBlock = document.createElement('div');
+    chartAnimationBlock.classList.add('chart-animation-block', 'tooltip');
+
+    const chartAnimationBox = document.createElement('div');
+    chartAnimationBox.classList.add('chart-animation-box', 'tooltip');
+
     const chartTooltip = document.createElement('div');
     chartTooltip.textContent = `${arrayPercent[i]}%`;
     chartTooltip.classList.add('chart-tooltip');
 
+    chartAnimationBox.appendChild(chartTooltip);
+    chartAnimationBlock.appendChild(chartAnimationBox);
+
     const chartPoint = document.createElement('div');
     chartPoint.classList.add('chart-point');
 
-    chartPointBox.appendChild(chartTooltip);
+    chartPointBox.appendChild(chartAnimationBlock);
     chartPointBox.appendChild(chartPoint);
 
     // Выставление позиции для каждого блока с точкой
     chartPointBox.style.bottom = `${arrayPercent[i] - 1.5}%`;
+    // chartPointBox.style.top = `${100 - (arrayPercent[i] + 16)}%`;
     if (window.screen.width > 768) {
       chartPointBox.style.left = `${
         (i / (arrayPercent.length - 1)) * 100 - 1
@@ -310,39 +320,106 @@ if (document.querySelector('.chart')) {
     chartArea.appendChild(chartPointBox);
   }
 
+  // canvas chart
+
   const canvas = chart.querySelector('.chart-area-canvas');
   const ctx = canvas.getContext('2d');
   const chartPoints = chart.querySelectorAll('.chart-point-box');
 
   const size = 100;
-  canvas.style.width = `${size}%`;
-  canvas.style.height = `${size}%`;
+  if (window.screen.width > 768) {
+    canvas.style.width = `77.7rem`;
+    canvas.style.height = `25.7rem`;
+  } else {
+    canvas.style.width = `54.2rem`;
+    canvas.style.height = `46.4rem`;
+  }
 
-  // Set actual size in memory (scaled to account for extra pixel density).
-  const scale = window.devicePixelRatio; // Change to 1 on retina screens to see blurry canvas.
+  const scale = window.devicePixelRatio;
+  console.log(scale);
   canvas.width = Math.floor(size * scale);
   canvas.height = Math.floor(size * scale);
-  // Normalize coordinate system to use CSS pixels.
+
   ctx.scale(scale, scale);
 
   ctx.beginPath();
+
   ctx.strokeStyle = '#f8eb00';
+  ctx.lineWidth = 1;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  ctx.miterLimit = 2;
+  ctx.imageSmoothingEnabled = false;
+
   for (let i = 0; i < chartPoints.length; i++) {
     let chartPoint = chartPoints[i];
 
-    let x =
-      100 - (parseFloat(chartPoint.style.left) + chartPoint.clientWidth / 2); // Получаем координаты x центра точки
-    let y =
-      100 - (parseFloat(chartPoint.style.bottom) + chartPoint.clientHeight / 2); // Получаем координаты y центра точки
-    console.log(x, y);
+    let x, y;
 
-    // if (i === 0) {
-    //   ctx.moveTo(x, y);
-    // } else {
-    //   ctx.lineTo(x, y);
-    // }
+    if (window.screen.width > 768) {
+      x = 0.5 + parseFloat(chartPoint.style.left);
+      y = 98 - parseFloat(chartPoint.style.bottom);
+    } else {
+      x = (parseFloat(chartPoint.style.left) + chartPoint.clientWidth / 2 + 16) - 29;
+      y = 121 - (parseFloat(chartPoint.style.bottom) + chartPoint.clientHeight / 2);
+    }
+
+    if (i === 0) {
+      ctx.moveTo(x, y);
+    } else {
+      ctx.lineTo(x, y);
+    }
   }
 
   ctx.stroke();
   ctx.closePath();
+
+  // animation chart
+
+  var chartAnimation = anime.timeline({
+    autoplay: true,
+  });
+
+  anime({
+    targets: '.chart .chart-axisY-line',
+    height: ['0%', '100%'],
+    duration: 1000,
+    easing: 'linear',
+  });
+  anime({
+    targets: '.chart .chart-axisX-line',
+    width: ['0%', '100%'],
+    duration: 1000,
+    easing: 'linear',
+  });
+  anime({
+    targets: '.chart-area .line',
+    width: ['0%', '100%'],
+    duration: 1000,
+    easing: 'linear',
+  });
+
+  chartAnimation
+    .add({
+      targets: '.chart-point',
+      opacity: [0, 1],
+      duration: 1000,
+      easing: 'linear',
+      delay: 1500,
+    })
+    .add({
+      targets: '.chart-canvas-box',
+      width: [
+        { value: '50%', duration: 1000, delay: 1000 },
+        { value: '100%', duration: 1000, delay: 1000 },
+      ],
+      duration: 3000,
+      easing: 'linear',
+    })
+    .add({
+      targets: ['.chart-animation-box'],
+      width: ['0', '100%'],
+      duration: 1000,
+      easing: 'linear',
+    });
 }
